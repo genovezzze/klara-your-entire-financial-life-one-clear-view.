@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id               String             @id @default(cuid())
+  name             String
+  email            String             @unique
+  passwordHash     String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  financialProfile FinancialProfile?
+  simulations      PensionSimulation[]
+}
+
+model FinancialProfile {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  age                 Int
+  monthlySalary       Decimal
+  secondPillarBalance Decimal
+  thirdPillarBalance  Decimal
+  pensionProvider     String
+  pensionPlan         String
+  currentStrategy     String
+  riskProfile         String
+  monthlyContribution Decimal
+  investmentsValue    Decimal
+  mortgageDebt        Decimal
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model PensionPlan {
+  id            String   @id @default(cuid())
+  provider      String
+  planName      String
+  pillar        String
+  strategy      String
+  riskLevel     String
+  return1Y      Float
+  return3Y      Float
+  return5Y      Float
+  managementFee Float
+  totalAssets   Float?
+  participants  Int?
+  sourceLabel   String
+  sourceUrl     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model WaitlistEntry {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+model PensionSimulation {
+  id                    String   @id @default(cuid())
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  selectedStrategy      String
+  projectedValue        Decimal
+  differenceFromCurrent Decimal
+  createdAt             DateTime @default(now())
+}
