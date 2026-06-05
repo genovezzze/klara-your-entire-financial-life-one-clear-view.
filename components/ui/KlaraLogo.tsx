@@ -4,23 +4,42 @@ interface KlaraLogoProps {
 }
 
 const sizes = {
-  sm: { width: 140, height: 50 },
-  md: { width: 200, height: 72 },
-  lg: { width: 300, height: 108 },
-  xl: { width: 500, height: 180 },
+  sm: { icon: 28, font: 18, gap: 8 },
+  md: { icon: 40, font: 26, gap: 10 },
+  lg: { icon: 58, font: 38, gap: 14 },
+  xl: { icon: 96, font: 62, gap: 20 },
 };
 
 export function KlaraLogo({ size = 'md', className }: KlaraLogoProps) {
-  const { width, height } = sizes[size];
+  const { icon, font, gap } = sizes[size];
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/logo.png"
-      alt="Klara"
-      width={width}
-      height={height}
+    <div
       className={className}
-      style={{ objectFit: 'contain', objectPosition: 'left center' }}
-    />
+      style={{ display: 'flex', alignItems: 'center', gap }}
+    >
+      <svg
+        width={icon}
+        height={icon}
+        viewBox="0 0 62 62"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Right circle — mint fill, rendered first (behind) */}
+        <circle cx="37" cy="24" r="20" fill="#00E5C0" stroke="currentColor" strokeWidth="3.8" />
+        {/* Left circle — no fill, outline on top so it shows through the overlap */}
+        <circle cx="24" cy="38" r="22" fill="none" stroke="currentColor" strokeWidth="3.8" />
+      </svg>
+      <span
+        style={{
+          fontSize: font,
+          fontWeight: 600,
+          letterSpacing: '-0.02em',
+          lineHeight: 1,
+          color: 'currentColor',
+        }}
+      >
+        Klara
+      </span>
+    </div>
   );
 }

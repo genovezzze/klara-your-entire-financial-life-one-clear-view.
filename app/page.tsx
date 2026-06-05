@@ -269,17 +269,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[oklch(0.14_0.06_255)] py-6 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-white/20">
-            © 2025 Klara · Prototype · Not financial advice
-          </p>
-          <Link href="/login" className="text-xs text-white/25 hover:text-white/45 transition-colors">
-            Try demo →
-          </Link>
-        </div>
-      </footer>
 
     </div>
   );
