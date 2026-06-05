@@ -8,11 +8,10 @@ const protectedRoutes = [
   '/pillar3',
   '/investing',
   '/child-funds',
-  '/roadmap',
   '/profile',
 ];
 
-const publicRoutes = ['/', '/login', '/register'];
+const publicRoutes = ['/', '/login', '/register', '/roadmap'];
 
 export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;

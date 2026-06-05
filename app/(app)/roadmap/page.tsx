@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation';
 import { CheckCircle, Clock, Sparkles } from 'lucide-react';
 import { getSession } from '@/lib/session';
 import { Header } from '@/components/layout/Header';
@@ -48,12 +47,12 @@ const sections = [
 
 export default async function RoadmapPage() {
   const session = await getSession();
-  if (!session?.userId) redirect('/login');
+  const userName = session?.name ?? 'Guest';
 
   return (
     <div>
       <Header
-        userName={session.name}
+        userName={userName}
         title="Integration roadmap"
         subtitle="From prototype to production — what's built and what's next"
       />
